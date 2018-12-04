@@ -24,10 +24,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcN-Se-TK0">
                                 <rect key="frame" x="32.5" y="223" width="123" height="97"/>
                                 <state key="normal" image="bubble-empty"/>
+                                <connections>
+                                    <action selector="user0Selected" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y5I-b9-cyt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMI-kf-9RK">
                                 <rect key="frame" x="220" y="223" width="123" height="97"/>
                                 <state key="normal" image="bubble-empty"/>
+                                <connections>
+                                    <action selector="user1Selected" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oz0-P1-3We"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kih-uX-PiE">
                                 <rect key="frame" x="12" y="517" width="351" height="74"/>
@@ -62,9 +68,14 @@
                     <navigationItem key="navigationItem" title="Movie Night" id="5rD-9W-VFj">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="xpF-0w-AjR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="clearMoviePrefs:" destination="BYZ-38-t0r" id="KO7-yi-Ch2"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="user0Button" destination="PcN-Se-TK0" id="Fyw-kz-U65"/>
+                        <outlet property="user1Button" destination="qMI-kf-9RK" id="aeH-uy-bye"/>
                         <segue destination="x84-jM-Hcb" kind="show" identifier="showGenres" id="4D2-Xq-4nB"/>
                     </connections>
                 </viewController>
@@ -106,7 +117,7 @@
         <!--Select genres-->
         <scene sceneID="ItF-jy-ZRE">
             <objects>
-                <viewController id="x84-jM-Hcb" sceneMemberID="viewController">
+                <viewController id="x84-jM-Hcb" customClass="GenresController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lcp-vs-xIY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,11 +139,14 @@
                                     <constraint firstAttribute="height" constant="57" id="H4Y-ms-hlx"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="shy-tR-9l6">
+                                <rect key="frame" x="177.5" y="263" width="20" height="20"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TwM-yq-d4y">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Oem-uO-5xQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenreCell" id="Oem-uO-5xQ" customClass="GenreCell" customModule="MovieNight" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oem-uO-5xQ" id="p2X-WF-rwQ">
@@ -161,6 +175,10 @@
                                                 <constraint firstItem="K5u-am-RTI" firstAttribute="centerY" secondItem="p2X-WF-rwQ" secondAttribute="centerY" id="umb-Ex-aiO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkboxImageView" destination="K5u-am-RTI" id="llF-9C-ggM"/>
+                                            <outlet property="genreLabel" destination="ukq-4I-BVD" id="1gi-PZ-Txu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -168,11 +186,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="leading" secondItem="wxD-XU-fcc" secondAttribute="leading" id="0WV-TP-cLX"/>
+                            <constraint firstItem="shy-tR-9l6" firstAttribute="centerX" secondItem="TwM-yq-d4y" secondAttribute="centerX" id="99X-wH-reE"/>
                             <constraint firstItem="TwM-yq-d4y" firstAttribute="trailing" secondItem="wxD-XU-fcc" secondAttribute="trailing" id="BW0-6F-L2q"/>
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="bottom" secondItem="wxD-XU-fcc" secondAttribute="bottom" id="Cci-na-8te"/>
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="trailing" secondItem="wxD-XU-fcc" secondAttribute="trailing" id="S7Z-1v-RgB"/>
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="top" secondItem="TwM-yq-d4y" secondAttribute="bottom" id="ZwR-A4-yIM"/>
                             <constraint firstItem="TwM-yq-d4y" firstAttribute="leading" secondItem="wxD-XU-fcc" secondAttribute="leading" id="cEQ-HG-FJc"/>
+                            <constraint firstItem="shy-tR-9l6" firstAttribute="centerY" secondItem="TwM-yq-d4y" secondAttribute="centerY" id="crt-KQ-wcq"/>
                             <constraint firstItem="TwM-yq-d4y" firstAttribute="top" secondItem="wxD-XU-fcc" secondAttribute="top" id="gVq-KY-Yk1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wxD-XU-fcc"/>
@@ -180,8 +200,17 @@
                     <navigationItem key="navigationItem" title="Select genres" id="gcw-QK-3wd">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="Ijk-2h-NRD">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="nextPrefs:" destination="x84-jM-Hcb" id="Upd-Uz-P6Y"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="shy-tR-9l6" id="3UV-Tm-7RK"/>
+                        <outlet property="nextButton" destination="Ijk-2h-NRD" id="Sjj-Ny-jae"/>
+                        <outlet property="selectionCountLabel" destination="U82-ZH-EwT" id="yxe-z0-pa2"/>
+                        <outlet property="tableView" destination="TwM-yq-d4y" id="IPe-af-HdS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pp8-Ee-XJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
