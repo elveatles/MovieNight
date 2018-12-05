@@ -22,3 +22,9 @@ struct Person: Codable {
         self.popularity = popularity
     }
 }
+
+extension Person: Hashable {
+    var hashValue: Int {
+        return id.hashValue
+    }
+}

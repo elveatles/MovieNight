@@ -8,7 +8,9 @@
 
 import UIKit
 
+/// Where users can see the movie results based on their preferences
 class MoviesController: UITableViewController {
+    var moviePrefs: MoviePrefs!
     var movies = [Movie]()
     
     override func viewDidLoad() {
@@ -20,10 +22,7 @@ class MoviesController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        let page = Stub.discoverMovie(page: 1)
-        movies = page.results
-        
-        tableView.reloadData()
+        downloadMovies()
     }
 
     // MARK: - Table view data source
@@ -97,5 +96,21 @@ class MoviesController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    /// Download movies based on the users' combined preferences
+    func downloadMovies() {
+        TmdbClient.main.discoverMovie(page: 1, withGenres: moviePrefs.genres, withPeople: moviePrefs.people) { [weak self] (apiResult) in
+            guard let s = self else {
+                return
+            }
+            
+            switch apiResult {
+            case .success(let result):
+                s.movies = result.results
+                s.tableView.reloadData()
+            case .failure(let error):
+                s.showAlert(title: "Movie Download Failure", message: error.localizedDescription)
+            }
+        }
+    }
 }

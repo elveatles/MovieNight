@@ -44,8 +44,11 @@
                                 <state key="normal" title="View Results">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <segue destination="E71-8i-ceA" kind="show" id="h7m-MZ-6DU"/>
+                                    <segue destination="E71-8i-ceA" kind="show" identifier="showMovies" id="h7m-MZ-6DU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,6 +79,7 @@
                     <connections>
                         <outlet property="user0Button" destination="PcN-Se-TK0" id="Fyw-kz-U65"/>
                         <outlet property="user1Button" destination="qMI-kf-9RK" id="aeH-uy-bye"/>
+                        <outlet property="viewResultsButton" destination="Kih-uX-PiE" id="TWu-65-glg"/>
                         <segue destination="x84-jM-Hcb" kind="show" identifier="showGenres" id="xVf-dU-J7M"/>
                     </connections>
                 </viewController>

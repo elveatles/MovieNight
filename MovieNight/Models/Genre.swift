@@ -18,3 +18,9 @@ struct Genre: Codable {
         self.name = name
     }
 }
+
+extension Genre: Hashable {
+    var hashValue: Int {
+        return id.hashValue
+    }
+}

@@ -25,8 +25,7 @@ class GenresController: UIViewController {
         tableView.dataSource = genresDataSource
         tableView.delegate = self
         
-        genresDataSource.genres = Stub.genres
-        tableView.reloadData()
+        downloadGenres()
     }
     
     /*
@@ -50,6 +49,23 @@ class GenresController: UIViewController {
         performSegue(withIdentifier: "showPeople", sender: nil)
     }
     
+    /// Download genres and display the results in the table view
+    func downloadGenres() {
+        TmdbClient.main.genreMovieList { [weak self] (apiResult) in
+            guard let s = self else {
+                return
+            }
+            
+            switch apiResult {
+            case .success(let result):
+                s.genresDataSource.genres = result.genres
+                s.tableView.reloadData()
+            case .failure(let error):
+                s.showAlert(title: "Genres Download Failed", message: error.localizedDescription)
+            }
+        }
+    }
+    
     /// Save the user selection to the movie prefs in the root view controller.
     func saveMoviePrefs() {
         // Get movie preferences from root view controller
@@ -57,7 +73,8 @@ class GenresController: UIViewController {
         var moviePrefs = rootVC.currentMoviePrefs
         // Get the genre objects from the user selection
         let indexPaths = tableView.indexPathsForSelectedRows ?? []
-        moviePrefs.genres = indexPaths.map { self.genresDataSource.genres[$0.row] }
+        let genres = indexPaths.map { self.genresDataSource.genres[$0.row] }
+        moviePrefs.genres = Set(genres)
         // Update the movie prefs for the root view controller
         rootVC.updateMoviePrefs(moviePrefs)
     }

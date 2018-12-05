@@ -10,6 +10,11 @@ import Foundation
 
 /// TMDB API Client
 class TmdbClient: ApiClient {
+    static var main: TmdbClient = {
+        let result = TmdbClient(apiKey: ApiKey.tmdb)
+        return result
+    }()
+    
     static let dateFormat = "yyyy-MM-dd"
     /// The maximum page number allowed by the API
     static let maxPage = 1000
@@ -68,7 +73,7 @@ class TmdbClient: ApiClient {
      - Parameter withPeople: Only include movies that have one of the people added as a either a actor or a crew member.
      - Parameter completionHandler: Called when the result is ready.
     */
-    func discoverMovie(page: Int, withGenres: [Genre], withPeople: [Person], completionHandler: @escaping (ApiResult<Page<Movie>>) -> Void) {
+    func discoverMovie(page: Int, withGenres: Set<Genre>, withPeople: Set<Person>, completionHandler: @escaping (ApiResult<Page<Movie>>) -> Void) {
         let endpoint = Tmdb.discoverMovie(apiKey: apiKey, page: page, withGenres: withGenres, withPeople: withPeople)
         let request = endpoint.request
         fetch(with: request, completionHandler: completionHandler)

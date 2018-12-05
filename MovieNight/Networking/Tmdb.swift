@@ -21,7 +21,7 @@ enum Tmdb {
     /// Get the list of popular people on TMDb. This list updates daily.
     case personPopular(apiKey: String, page: Int)
     /// Discover movies based on certain filters
-    case discoverMovie(apiKey: String, page: Int, withGenres: [Genre], withPeople: [Person])
+    case discoverMovie(apiKey: String, page: Int, withGenres: Set<Genre>, withPeople: Set<Person>)
 }
 
 extension Tmdb: Endpoint {

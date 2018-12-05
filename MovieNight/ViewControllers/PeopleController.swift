@@ -53,6 +53,23 @@ class PeopleController: UIViewController {
         print("performSegue")
     }
     
+    /// Download people and display results in the table view
+    func downloadPeople() {
+        TmdbClient.main.personPopular(page: 1) { [weak self] (apiResult) in
+            guard let s = self else {
+                return
+            }
+            
+            switch apiResult {
+            case .success(let result):
+                s.peopleDataSource.people = result.results
+                s.tableView.reloadData()
+            case .failure(let error):
+                s.showAlert(title: "People Download Failure", message: error.localizedDescription)
+            }
+        }
+    }
+    
     /// Load the next page of people
     func loadNextPage() {
         // latestPage should be set
@@ -91,7 +108,8 @@ class PeopleController: UIViewController {
         var moviePrefs = rootVC.currentMoviePrefs
         // Get the person objects from the user selection
         let indexPaths = tableView.indexPathsForSelectedRows ?? []
-        moviePrefs.people = indexPaths.map { self.peopleDataSource.people[$0.row] }
+        let people = indexPaths.map { self.peopleDataSource.people[$0.row] }
+        moviePrefs.people = Set(people)
         // Update the movie prefs for the root view controller
         rootVC.updateMoviePrefs(moviePrefs)
     }
