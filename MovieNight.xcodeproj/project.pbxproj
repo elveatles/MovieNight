@@ -29,6 +29,8 @@
 		09EDCF6421B748B300701213 /* PeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6321B748B300701213 /* PeopleDataSource.swift */; };
 		09EDCF6721B7575900701213 /* TableMultiSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6621B7575900701213 /* TableMultiSelectionDelegate.swift */; };
 		09EDCF6921B75D6D00701213 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6821B75D6D00701213 /* PersonCell.swift */; };
+		09EDCF6F21B84E0100701213 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6E21B84E0100701213 /* Movie.swift */; };
+		09EDCF7121B858A400701213 /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF7021B858A400701213 /* MoviesController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		09EDCF6321B748B300701213 /* PeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDataSource.swift; sourceTree = "<group>"; };
 		09EDCF6621B7575900701213 /* TableMultiSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMultiSelectionDelegate.swift; sourceTree = "<group>"; };
 		09EDCF6821B75D6D00701213 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		09EDCF6E21B84E0100701213 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		09EDCF7021B858A400701213 /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 				099D3AF121B1CDE300560D6A /* ViewController.swift */,
 				096D0BAA21B5FE0C007FDBA0 /* GenresController.swift */,
 				09EDCF6121B747F700701213 /* PeopleController.swift */,
+				09EDCF7021B858A400701213 /* MoviesController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 				096D0BA521B5FBDD007FDBA0 /* MoviePrefs.swift */,
 				096D0BAF21B60248007FDBA0 /* Stub.swift */,
 				09EDCF5F21B7372500701213 /* Person.swift */,
+				09EDCF6E21B84E0100701213 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,6 +254,8 @@
 				096D0BA621B5FBDD007FDBA0 /* MoviePrefs.swift in Sources */,
 				096D0BB021B60248007FDBA0 /* Stub.swift in Sources */,
 				09EDCF6221B747F700701213 /* PeopleController.swift in Sources */,
+				09EDCF7121B858A400701213 /* MoviesController.swift in Sources */,
+				09EDCF6F21B84E0100701213 /* Movie.swift in Sources */,
 				099D3B0521B2226400560D6A /* ApiKey.swift in Sources */,
 				099D3AF021B1CDE300560D6A /* AppDelegate.swift in Sources */,
 				099D3B0721B2272D00560D6A /* ApiClient.swift in Sources */,

@@ -174,4 +174,27 @@ struct Stub {
             return defaultReturn
         }
     }
+    
+    static func discoverMovie(page: Int) -> Page<Movie> {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = TmdbClient.dateFormat
+        
+        let defaultResult = Page(page: 1, totalResults: 2, totalPages: 1, results: [
+            // 1
+            Movie(
+                id: 335983,
+                title: "Venom",
+                releaseDate: dateFormatter.date(from: "2018-10-03")!,
+                genreIds: [878],
+                posterPath: "/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg"),
+            // 2
+            Movie(
+                id: 338952,
+                title: "Fantastic Beasts: The Crimes of Grindelwald",
+                releaseDate: dateFormatter.date(from: "2018-11-14")!,
+                genreIds: [10751, 14, 12],
+                posterPath: "/uyJgTzAsp3Za2TaPiZt2yaKYRIR.jpg"),
+        ])
+        return defaultResult
+    }
 }

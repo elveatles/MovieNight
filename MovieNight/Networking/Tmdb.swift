@@ -20,6 +20,8 @@ enum Tmdb {
     case genreMovieList(apiKey: String)
     /// Get the list of popular people on TMDb. This list updates daily.
     case personPopular(apiKey: String, page: Int)
+    /// Discover movies based on certain filters
+    case discoverMovie(apiKey: String, page: Int, withGenres: [Genre], withPeople: [Person])
 }
 
 extension Tmdb: Endpoint {
@@ -35,6 +37,7 @@ extension Tmdb: Endpoint {
         switch self {
         case .genreMovieList: return "\(rootPath)/genre/movie/list"
         case .personPopular: return "\(rootPath)/person/popular"
+        case .discoverMovie: return "\(rootPath)/discover/movie"
         }
     }
     
@@ -46,6 +49,17 @@ extension Tmdb: Endpoint {
             return [
                 URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey),
                 URLQueryItem(name: Tmdb.Keys.page, value: String(page))
+            ]
+        case .discoverMovie(let apiKey, let page, let withGenres, let withPeople):
+            let genreIdsArray = withGenres.map { "\($0.id)" }
+            let genreIds = genreIdsArray.joined(separator: "|")
+            let peopleIdsArray = withPeople.map { "\($0.id)" }
+            let peopleIds = peopleIdsArray.joined(separator: "|")
+            return [
+                URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey),
+                URLQueryItem(name: Tmdb.Keys.page, value: String(page)),
+                URLQueryItem(name: "with_genres", value: genreIds),
+                URLQueryItem(name: "with_people", value: peopleIds)
             ]
         }
     }
