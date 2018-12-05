@@ -8,6 +8,21 @@
 
 import Foundation
 
+/// Generic page
+struct Page<T: Codable>: Codable {
+    let page: Int
+    let totalResults: Int
+    let totalPages: Int
+    let results: [T]
+    
+    init(page: Int, totalResults: Int, totalPages: Int, results: [T]) {
+        self.page = page
+        self.totalResults = totalResults
+        self.totalPages = totalPages
+        self.results = results
+    }
+}
+
 /// Genres page
 struct GenresPage: Codable {
     let genres: [Genre]

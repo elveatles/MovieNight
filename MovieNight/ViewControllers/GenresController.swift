@@ -13,11 +13,11 @@ class GenresController: UIViewController {
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionCountLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let genresDataSource = GenresDataSource()
-    let numberOfGenresToSelect = 5
-    var moviePrefs: MoviePrefs!
+    private let genresDataSource = GenresDataSource()
+    private lazy var selectionDelegate: TableMultiSelectionDelegate = {
+        return TableMultiSelectionDelegate(selectionCountLabel: selectionCountLabel, nextButton: nextButton)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,53 +30,50 @@ class GenresController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
-    @IBAction func nextPrefs(_ sender: UIBarButtonItem) {
-        // Get the root view controller to pass movie prefs data back to.
-        // Force unwrapping because the app is broken if we can't get the root view controller
-        // to pass data back to
-        let vc = navigationController!.viewControllers.first as! ViewController
+    /// Skip this preference
+    @IBAction func skip(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "showPeople", sender: nil)
+    }
+    
+    /// Save this preference and go to the next view controller.
+    @IBAction func next(_ sender: UIBarButtonItem) {
+        saveMoviePrefs()
+        performSegue(withIdentifier: "showPeople", sender: nil)
+    }
+    
+    /// Save the user selection to the movie prefs in the root view controller.
+    func saveMoviePrefs() {
+        // Get movie preferences from root view controller
+        let rootVC = navigationController!.viewControllers.first as! ViewController
+        var moviePrefs = rootVC.currentMoviePrefs
         // Get the genre objects from the user selection
         let indexPaths = tableView.indexPathsForSelectedRows ?? []
         moviePrefs.genres = indexPaths.map { self.genresDataSource.genres[$0.row] }
-        // Update the root view controller
-        vc.updateMoviePrefs(moviePrefs)
-        navigationController?.popViewController(animated: true)
-    }
-    
-    /// Update the UI based on the current user selection
-    func updateForSelection() {
-        let selectedCount = tableView.indexPathsForSelectedRows?.count ?? 0
-        selectionCountLabel.text = "\(selectedCount) of \(numberOfGenresToSelect) selected"
-        nextButton.isEnabled = selectedCount == numberOfGenresToSelect
+        // Update the movie prefs for the root view controller
+        rootVC.updateMoviePrefs(moviePrefs)
     }
 }
 
 
 extension GenresController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        // Limit the number of cells that are allowed to be selected
-        let selectedCount = tableView.indexPathsForSelectedRows?.count ?? 0
-        guard selectedCount < numberOfGenresToSelect else {
-            return nil
-        }
-        
-        return indexPath
+        return selectionDelegate.tableView(tableView, willSelectRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        updateForSelection()
+        selectionDelegate.tableView(tableView, didSelectRowAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        updateForSelection()
+        selectionDelegate.tableView(tableView, didDeselectRowAt: indexPath)
     }
 }

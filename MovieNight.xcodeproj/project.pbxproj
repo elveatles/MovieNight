@@ -24,6 +24,11 @@
 		099D3B0C21B22C9000560D6A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B0B21B22C9000560D6A /* Genre.swift */; };
 		099D3B1021B2393B00560D6A /* Tmdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B0F21B2393B00560D6A /* Tmdb.swift */; };
 		099D3B1221B2398000560D6A /* TmdbClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B1121B2398000560D6A /* TmdbClient.swift */; };
+		09EDCF6021B7372500701213 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF5F21B7372500701213 /* Person.swift */; };
+		09EDCF6221B747F700701213 /* PeopleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6121B747F700701213 /* PeopleController.swift */; };
+		09EDCF6421B748B300701213 /* PeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6321B748B300701213 /* PeopleDataSource.swift */; };
+		09EDCF6721B7575900701213 /* TableMultiSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6621B7575900701213 /* TableMultiSelectionDelegate.swift */; };
+		09EDCF6921B75D6D00701213 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6821B75D6D00701213 /* PersonCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		099D3B0B21B22C9000560D6A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		099D3B0F21B2393B00560D6A /* Tmdb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmdb.swift; sourceTree = "<group>"; };
 		099D3B1121B2398000560D6A /* TmdbClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbClient.swift; sourceTree = "<group>"; };
+		09EDCF5F21B7372500701213 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		09EDCF6121B747F700701213 /* PeopleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleController.swift; sourceTree = "<group>"; };
+		09EDCF6321B748B300701213 /* PeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDataSource.swift; sourceTree = "<group>"; };
+		09EDCF6621B7575900701213 /* TableMultiSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMultiSelectionDelegate.swift; sourceTree = "<group>"; };
+		09EDCF6821B75D6D00701213 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +74,7 @@
 			children = (
 				099D3AF121B1CDE300560D6A /* ViewController.swift */,
 				096D0BAA21B5FE0C007FDBA0 /* GenresController.swift */,
+				09EDCF6121B747F700701213 /* PeopleController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -72,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				096D0BAD21B5FEC6007FDBA0 /* GenreCell.swift */,
+				09EDCF6821B75D6D00701213 /* PersonCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -80,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				096D0BB221B604C5007FDBA0 /* GenresDataSource.swift */,
+				09EDCF6321B748B300701213 /* PeopleDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -103,6 +116,7 @@
 		099D3AEE21B1CDE300560D6A /* MovieNight */ = {
 			isa = PBXGroup;
 			children = (
+				09EDCF6521B7570B00701213 /* Delegates */,
 				096D0BB121B60471007FDBA0 /* DataSources */,
 				096D0BAC21B5FE99007FDBA0 /* Views */,
 				096D0BA721B5FD31007FDBA0 /* ViewControllers */,
@@ -136,8 +150,17 @@
 				099D3B0B21B22C9000560D6A /* Genre.swift */,
 				096D0BA521B5FBDD007FDBA0 /* MoviePrefs.swift */,
 				096D0BAF21B60248007FDBA0 /* Stub.swift */,
+				09EDCF5F21B7372500701213 /* Person.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		09EDCF6521B7570B00701213 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				09EDCF6621B7575900701213 /* TableMultiSelectionDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,15 +234,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09EDCF6021B7372500701213 /* Person.swift in Sources */,
 				099D3AF221B1CDE300560D6A /* ViewController.swift in Sources */,
+				09EDCF6921B75D6D00701213 /* PersonCell.swift in Sources */,
 				099D3B1021B2393B00560D6A /* Tmdb.swift in Sources */,
+				09EDCF6721B7575900701213 /* TableMultiSelectionDelegate.swift in Sources */,
 				096D0BB321B604C5007FDBA0 /* GenresDataSource.swift in Sources */,
 				096D0BAB21B5FE0C007FDBA0 /* GenresController.swift in Sources */,
 				099D3B1221B2398000560D6A /* TmdbClient.swift in Sources */,
 				099D3B0321B20A0D00560D6A /* Endpoint.swift in Sources */,
 				099D3B0A21B22C0E00560D6A /* Page.swift in Sources */,
+				09EDCF6421B748B300701213 /* PeopleDataSource.swift in Sources */,
 				096D0BA621B5FBDD007FDBA0 /* MoviePrefs.swift in Sources */,
 				096D0BB021B60248007FDBA0 /* Stub.swift in Sources */,
+				09EDCF6221B747F700701213 /* PeopleController.swift in Sources */,
 				099D3B0521B2226400560D6A /* ApiKey.swift in Sources */,
 				099D3AF021B1CDE300560D6A /* AppDelegate.swift in Sources */,
 				099D3B0721B2272D00560D6A /* ApiClient.swift in Sources */,

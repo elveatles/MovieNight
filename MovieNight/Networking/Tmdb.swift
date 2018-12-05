@@ -13,10 +13,13 @@ enum Tmdb {
     /// queryItem keys
     struct Keys {
         static let apiKey = "api_key"
+        static let page = "page"
     }
     
     /// Get the list of official genres for movies.
     case genreMovieList(apiKey: String)
+    /// Get the list of popular people on TMDb. This list updates daily.
+    case personPopular(apiKey: String, page: Int)
 }
 
 extension Tmdb: Endpoint {
@@ -31,12 +34,19 @@ extension Tmdb: Endpoint {
     var path: String {
         switch self {
         case .genreMovieList: return "\(rootPath)/genre/movie/list"
+        case .personPopular: return "\(rootPath)/person/popular"
         }
     }
     
     var queryItems: [URLQueryItem] {
         switch self {
-        case .genreMovieList(let apiKey): return [URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey)]
+        case .genreMovieList(let apiKey):
+            return [URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey)]
+        case .personPopular(let apiKey, let page):
+            return [
+                URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey),
+                URLQueryItem(name: Tmdb.Keys.page, value: String(page))
+            ]
         }
     }
 }

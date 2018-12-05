@@ -12,4 +12,6 @@ import Foundation
 struct MoviePrefs {
     /// The genres the user likes
     var genres: [Genre]?
+    /// People the user likes
+    var people: [Person]?
 }

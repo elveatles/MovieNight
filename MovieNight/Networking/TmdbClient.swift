@@ -10,6 +10,9 @@ import Foundation
 
 /// TMDB API Client
 class TmdbClient: ApiClient {
+    /// The maximum page number allowed by the API
+    static let maxPage = 1000
+    
     /// API Key to use for endpoint authentication
     let apiKey: String
     let session: URLSession
@@ -37,6 +40,12 @@ class TmdbClient: ApiClient {
     */
     func genreMovieList(completionHandler: @escaping (ApiResult<GenresPage>) -> Void) {
         let endpoint = Tmdb.genreMovieList(apiKey: apiKey)
+        let request = endpoint.request
+        fetch(with: request, completionHandler: completionHandler)
+    }
+    
+    func personPopular(page: Int, completionHandler: @escaping (ApiResult<Page<Person>>) -> Void) {
+        let endpoint = Tmdb.personPopular(apiKey: apiKey, page: page)
         let request = endpoint.request
         fetch(with: request, completionHandler: completionHandler)
     }
