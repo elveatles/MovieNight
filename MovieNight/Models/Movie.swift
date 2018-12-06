@@ -24,6 +24,19 @@ struct Movie: Codable {
         case posterPath
     }
     
+    /// Get the full URL for the poster image by combining configuration base URL and posterPath
+    var posterURL: URL? {
+        guard let pPath = posterPath else {
+            return nil
+        }
+        
+        let imagesConfig = Cache.configuration.images
+        let size = imagesConfig.posterSizes.first ?? "w92"
+        var result = imagesConfig.secureBaseUrl.appendingPathComponent(size)
+        result = result.appendingPathComponent(pPath)
+        return result
+    }
+    
     /// All this just to set releaseDate to nil if the json value is an empty string
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

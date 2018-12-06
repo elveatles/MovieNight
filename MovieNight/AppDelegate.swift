@@ -16,6 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Download TMDb API configuration and cache it in memory
+        TmdbClient.main.configuration { (apiResult) in
+            switch apiResult {
+            case .success(let result):
+                Cache.configuration = result
+            case .failure(let error):
+                print("Failed to download TMDb API configuration. Using default configuration which is probably out of date and could cause problems for image downloads.")
+                print(error.localizedDescription)
+            }
+        }
+        
         return true
     }
 

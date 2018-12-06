@@ -78,4 +78,15 @@ class TmdbClient: ApiClient {
         let request = endpoint.request
         fetch(with: request, completionHandler: completionHandler)
     }
+    
+    /**
+     Get the system wide configuration information. Some elements of the API require some knowledge of this configuration data.
+     
+     - Parameter completionHandler: Called when the result is ready.
+    */
+    func configuration(completionHandler: @escaping (ApiResult<Configuration>) -> Void) {
+        let endpoint = Tmdb.configuration(apiKey: apiKey)
+        let request = endpoint.request
+        fetch(with: request, completionHandler: completionHandler)
+    }
 }

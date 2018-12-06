@@ -13,6 +13,10 @@ class MoviesController: UITableViewController {
     var moviePrefs: MoviePrefs!
     var movies = [Movie]()
     
+    private lazy var tableImagesDownloader: TableImagesDownloader = {
+        return TableImagesDownloader(tableView: tableView)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,7 +52,12 @@ class MoviesController: UITableViewController {
         } else {
             cell.detailTextLabel?.text = "????"
         }
-
+        
+        // Set the image
+        if let posterURL = movie.posterURL {
+            downloadOrAssignImage(cell: cell, indexPath: indexPath, url: posterURL)
+        }
+        
         return cell
     }
 
@@ -111,6 +120,23 @@ class MoviesController: UITableViewController {
             case .failure(let error):
                 s.showAlert(title: "Movie Download Failure", message: error.localizedDescription)
             }
+        }
+    }
+    
+    /**
+     Download an image if it has not been downloaded, otherwise assign the image from the cache.
+     
+     - Parameter cell: The cell to assign the image to.
+     - Parameter indexPath: The index path of the cell.
+     - Parameter url: The url to download.
+     */
+    func downloadOrAssignImage(cell: UITableViewCell, indexPath: IndexPath, url: URL) {
+        if let image = Cache.images[url] {
+            cell.imageView?.image = image
+        } else {
+            // Assign different default image depending if the row is odd or even
+            cell.imageView?.image = indexPath.row % 2 == 0 ? #imageLiteral(resourceName: "default") : #imageLiteral(resourceName: "default_odd")
+            tableImagesDownloader.downloadImage(url: url, indexPath: indexPath)
         }
     }
 }

@@ -16,7 +16,9 @@ class PeopleController: UIViewController {
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    private let peopleDataSource = PeopleDataSource()
+    private lazy var peopleDataSource = {
+        return PeopleDataSource(tableView: tableView)
+    }()
     private lazy var selectionDelegate: TableMultiSelectionDelegate = {
         return TableMultiSelectionDelegate(selectionCountLabel: selectionCountLabel, nextButton: nextButton)
     }()

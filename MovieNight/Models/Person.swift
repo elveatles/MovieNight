@@ -15,6 +15,22 @@ struct Person: Codable {
     let profilePath: String
     let popularity: Float
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case profilePath
+        case popularity
+    }
+    
+    /// Get the full URL for the profile image by combining configuration base URL and profilePath
+    var profileURL: URL {
+        let imagesConfig = Cache.configuration.images
+        let size = imagesConfig.profileSizes.first ?? "w45"
+        var result = imagesConfig.secureBaseUrl.appendingPathComponent(size)
+        result = result.appendingPathComponent(profilePath)
+        return result
+    }
+    
     init(id: Int, name: String, profilePath: String, popularity: Float) {
         self.id = id
         self.name = name

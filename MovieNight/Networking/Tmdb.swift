@@ -16,6 +16,9 @@ enum Tmdb {
         static let page = "page"
     }
     
+    /// Get the system wide configuration information.
+    /// Some elements of the API require some knowledge of this configuration data.
+    case configuration(apiKey: String)
     /// Get the list of official genres for movies.
     case genreMovieList(apiKey: String)
     /// Get the list of popular people on TMDb. This list updates daily.
@@ -35,6 +38,7 @@ extension Tmdb: Endpoint {
     
     var path: String {
         switch self {
+        case .configuration: return "\(rootPath)/configuration"
         case .genreMovieList: return "\(rootPath)/genre/movie/list"
         case .personPopular: return "\(rootPath)/person/popular"
         case .discoverMovie: return "\(rootPath)/discover/movie"
@@ -43,6 +47,8 @@ extension Tmdb: Endpoint {
     
     var queryItems: [URLQueryItem] {
         switch self {
+        case .configuration(let apiKey):
+            return [URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey)]
         case .genreMovieList(let apiKey):
             return [URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey)]
         case .personPopular(let apiKey, let page):
