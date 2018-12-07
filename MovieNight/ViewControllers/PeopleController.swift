@@ -13,8 +13,6 @@ class PeopleController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionCountLabel: UILabel!
     @IBOutlet weak var nextButton: UIBarButtonItem!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private lazy var peopleDataSource = {
         return PeopleDataSource(tableView: tableView)
@@ -22,18 +20,16 @@ class PeopleController: UIViewController {
     private lazy var selectionDelegate: TableMultiSelectionDelegate = {
         return TableMultiSelectionDelegate(selectionCountLabel: selectionCountLabel, nextButton: nextButton)
     }()
-    private var latestPage: Page<Person>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = peopleDataSource
+        tableView.prefetchDataSource = peopleDataSource
         tableView.delegate = self
         
-        latestPage = Stub.popularPeople(page: 1)
-        peopleDataSource.people = latestPage!.results
-        
-        tableView.reloadData()
+        peopleDataSource.fetchError = fetchError
+        peopleDataSource.fetch()
     }
     
     /*
@@ -55,54 +51,6 @@ class PeopleController: UIViewController {
         print("performSegue")
     }
     
-    /// Download people and display results in the table view
-    func downloadPeople() {
-        TmdbClient.main.personPopular(page: 1) { [weak self] (apiResult) in
-            guard let s = self else {
-                return
-            }
-            
-            switch apiResult {
-            case .success(let result):
-                s.peopleDataSource.people = result.results
-                s.tableView.reloadData()
-            case .failure(let error):
-                s.showAlert(title: "People Download Failure", message: error.localizedDescription)
-            }
-        }
-    }
-    
-    /// Load the next page of people
-    func loadNextPage() {
-        // latestPage should be set
-        guard let page = latestPage else {
-            return
-        }
-        
-        // If we are at the last page, no need to load more
-        guard page.page < page.totalPages && page.page < TmdbClient.maxPage else {
-            return
-        }
-        
-        footerView.isHidden = false
-        activityIndicator.startAnimating()
-        
-        // Test
-        latestPage = Stub.popularPeople(page: page.page + 1)
-        
-        tableView.beginUpdates()
-        peopleDataSource.people += latestPage!.results
-        let startRow = peopleDataSource.people.count - latestPage!.results.count
-        let range = startRow..<peopleDataSource.people.count
-        let indexPaths = range.map { IndexPath(row: $0, section: 0) }
-        print("insert at: \(indexPaths)")
-        tableView.insertRows(at: indexPaths, with: .automatic)
-        tableView.endUpdates()
-        
-        footerView.isHidden = true
-        activityIndicator.stopAnimating()
-    }
-    
     /// Save the user selection to the movie prefs in the root view controller.
     func saveMoviePrefs() {
         // Get movie preferences from root view controller
@@ -110,10 +58,14 @@ class PeopleController: UIViewController {
         var moviePrefs = rootVC.currentMoviePrefs
         // Get the person objects from the user selection
         let indexPaths = tableView.indexPathsForSelectedRows ?? []
-        let people = indexPaths.map { self.peopleDataSource.people[$0.row] }
+        let people = indexPaths.map { self.peopleDataSource.entities[$0.row] }
         moviePrefs.people = Set(people)
         // Update the movie prefs for the root view controller
         rootVC.updateMoviePrefs(moviePrefs)
+    }
+    
+    private func fetchError(error: Error) {
+        showAlert(title: "People Download Failure", message: error.localizedDescription)
     }
 }
 
@@ -129,7 +81,7 @@ extension PeopleController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         selectionDelegate.tableView(tableView, didDeselectRowAt: indexPath)
     }
-    
+    /*
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Load more results when tableView has scrolled to the bottom.
         let lastElement = peopleDataSource.people.count - 1
@@ -137,4 +89,5 @@ extension PeopleController: UITableViewDelegate {
             loadNextPage()
         }
     }
+    */
 }

@@ -13,6 +13,7 @@ class PersonCell: UITableViewCell {
     @IBOutlet weak var checkboxImageView: UIImageView!
     @IBOutlet weak var personImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +36,14 @@ class PersonCell: UITableViewCell {
      
      - Parameter person: The person to configure with.
      */
-    func configure(with person: Person) {
-        self.nameLabel.text = person.name
+    func configure(with person: Person?) {
+        guard let p = person else {
+            self.nameLabel.text = ""
+            activityIndicator.startAnimating()
+            return
+        }
+        
+        self.nameLabel.text = p.name
+        activityIndicator.stopAnimating()
     }
 }

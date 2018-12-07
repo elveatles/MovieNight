@@ -12,7 +12,7 @@ import Foundation
 struct Person: Codable {
     let id: Int
     let name: String
-    let profilePath: String
+    let profilePath: String?
     let popularity: Float
     
     enum CodingKeys: String, CodingKey {
@@ -23,15 +23,19 @@ struct Person: Codable {
     }
     
     /// Get the full URL for the profile image by combining configuration base URL and profilePath
-    var profileURL: URL {
+    var profileURL: URL? {
+        guard let pPath = profilePath else {
+            return nil
+        }
+        
         let imagesConfig = Cache.configuration.images
         let size = imagesConfig.profileSizes.first ?? "w45"
         var result = imagesConfig.secureBaseUrl.appendingPathComponent(size)
-        result = result.appendingPathComponent(profilePath)
+        result = result.appendingPathComponent(pPath)
         return result
     }
     
-    init(id: Int, name: String, profilePath: String, popularity: Float) {
+    init(id: Int, name: String, profilePath: String?, popularity: Float) {
         self.id = id
         self.name = name
         self.profilePath = profilePath

@@ -62,4 +62,26 @@ class TableImagesDownloader {
         downloadsInProgress[indexPath] = downloader
         downloadQueue.addOperation(downloader)
     }
+    
+    /**
+     Download an image if it has not been downloaded, otherwise assign the image from the cache.
+     
+     - Parameter imageView: The image view to assign the image to.
+     - Parameter indexPath: The index path of the cell.
+     - Parameter url: The url to download. If nil, defaultImage is used.
+     - Parameter defaultImage: The default image used when the downloaded image isn't available yet.
+     */
+    func downloadOrAssignImage(imageView: UIImageView, indexPath: IndexPath, url: URL?, defaultImage: UIImage) {
+        guard let url = url else {
+            imageView.image = defaultImage
+            return
+        }
+        
+        if let image = Cache.images[url] {
+            imageView.image = image
+        } else {
+            imageView.image = defaultImage
+            downloadImage(url: url, indexPath: indexPath)
+        }
+    }
 }
