@@ -18,6 +18,12 @@ class TmdbClient: ApiClient {
     static let dateFormat = "yyyy-MM-dd"
     /// The maximum page number allowed by the API
     static let maxPage = 1000
+    /// Date formatter for TMDb dates.
+    static var dateFormatter: DateFormatter = {
+        let result = DateFormatter()
+        result.dateFormat = dateFormat
+        return result
+    }()
     
     /// API Key to use for endpoint authentication
     let apiKey: String
@@ -71,10 +77,17 @@ class TmdbClient: ApiClient {
      - Parameter page: Specify the page of results to query.
      - Parameter withGenres: Genres that you want to include in the results.
      - Parameter withPeople: Only include movies that have one of the people added as a either a actor or a crew member.
+     - Paramter primaryReleaseDate
      - Parameter completionHandler: Called when the result is ready.
     */
-    func discoverMovie(page: Int, withGenres: Set<Genre>, withPeople: Set<Person>, completionHandler: @escaping (ApiResult<Page<Movie>>) -> Void) {
-        let endpoint = Tmdb.discoverMovie(apiKey: apiKey, page: page, withGenres: withGenres, withPeople: withPeople)
+    func discoverMovie(
+        page: Int,
+        withGenres: Set<Genre>,
+        withPeople: Set<Person>,
+        primaryReleaseDateGte: Date?,
+        primaryReleaseDateLte: Date?,
+        completionHandler: @escaping (ApiResult<Page<Movie>>) -> Void) {
+        let endpoint = Tmdb.discoverMovie(apiKey: apiKey, page: page, withGenres: withGenres, withPeople: withPeople, primaryReleaseDateGte: primaryReleaseDateGte, primaryReleaseDateLte: primaryReleaseDateLte)
         let request = endpoint.request
         fetch(with: request, completionHandler: completionHandler)
     }

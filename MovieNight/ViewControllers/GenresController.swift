@@ -23,7 +23,7 @@ class GenresController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = genresDataSource
-        tableView.delegate = self
+        tableView.delegate = selectionDelegate
         
         downloadGenres()
     }
@@ -77,20 +77,5 @@ class GenresController: UIViewController {
         moviePrefs.genres = Set(genres)
         // Update the movie prefs for the root view controller
         rootVC.updateMoviePrefs(moviePrefs)
-    }
-}
-
-
-extension GenresController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return selectionDelegate.tableView(tableView, willSelectRowAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectionDelegate.tableView(tableView, didSelectRowAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        selectionDelegate.tableView(tableView, didDeselectRowAt: indexPath)
     }
 }

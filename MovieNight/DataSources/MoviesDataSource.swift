@@ -74,7 +74,13 @@ class MoviesDataSource: NSObject, UITableViewDataSource {
     /// Callback for pagedDataSource.apiRequest.
     /// Fills is parameters based on moviePrefs.
     func apiRequest(page: Int, completionHandler: @escaping (ApiResult<Page<Movie>>) -> Void) {
-        TmdbClient.main.discoverMovie(page: page, withGenres: moviePrefs.genres, withPeople: moviePrefs.people, completionHandler: completionHandler)
+        TmdbClient.main.discoverMovie(
+            page: page,
+            withGenres: moviePrefs.genres,
+            withPeople: moviePrefs.people,
+            primaryReleaseDateGte: moviePrefs.releaseDateGte,
+            primaryReleaseDateLte: moviePrefs.releaseDateLte,
+            completionHandler: completionHandler)
     }
     
     /// Fetch more results

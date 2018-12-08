@@ -33,6 +33,9 @@
 		099D3B0C21B22C9000560D6A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B0B21B22C9000560D6A /* Genre.swift */; };
 		099D3B1021B2393B00560D6A /* Tmdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B0F21B2393B00560D6A /* Tmdb.swift */; };
 		099D3B1221B2398000560D6A /* TmdbClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3B1121B2398000560D6A /* TmdbClient.swift */; };
+		09CFED1621BB495100D2E707 /* ReleaseDatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CFED1521BB495100D2E707 /* ReleaseDatesController.swift */; };
+		09CFED1821BB4B4500D2E707 /* DecadeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CFED1721BB4B4500D2E707 /* DecadeCell.swift */; };
+		09CFED1A21BB4C0200D2E707 /* ReleaseDatesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CFED1921BB4C0200D2E707 /* ReleaseDatesDataSource.swift */; };
 		09EDCF6021B7372500701213 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF5F21B7372500701213 /* Person.swift */; };
 		09EDCF6221B747F700701213 /* PeopleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6121B747F700701213 /* PeopleController.swift */; };
 		09EDCF6421B748B300701213 /* PeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EDCF6321B748B300701213 /* PeopleDataSource.swift */; };
@@ -72,6 +75,9 @@
 		099D3B0B21B22C9000560D6A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		099D3B0F21B2393B00560D6A /* Tmdb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmdb.swift; sourceTree = "<group>"; };
 		099D3B1121B2398000560D6A /* TmdbClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbClient.swift; sourceTree = "<group>"; };
+		09CFED1521BB495100D2E707 /* ReleaseDatesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDatesController.swift; sourceTree = "<group>"; };
+		09CFED1721BB4B4500D2E707 /* DecadeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecadeCell.swift; sourceTree = "<group>"; };
+		09CFED1921BB4C0200D2E707 /* ReleaseDatesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDatesDataSource.swift; sourceTree = "<group>"; };
 		09EDCF5F21B7372500701213 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		09EDCF6121B747F700701213 /* PeopleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleController.swift; sourceTree = "<group>"; };
 		09EDCF6321B748B300701213 /* PeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDataSource.swift; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 				096D0BAA21B5FE0C007FDBA0 /* GenresController.swift */,
 				09EDCF6121B747F700701213 /* PeopleController.swift */,
 				09EDCF7021B858A400701213 /* MoviesController.swift */,
+				09CFED1521BB495100D2E707 /* ReleaseDatesController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -110,6 +117,7 @@
 				096D0BAD21B5FEC6007FDBA0 /* GenreCell.swift */,
 				09EDCF6821B75D6D00701213 /* PersonCell.swift */,
 				09069A4921BA0B70005E5314 /* MovieCell.swift */,
+				09CFED1721BB4B4500D2E707 /* DecadeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +129,7 @@
 				09EDCF6321B748B300701213 /* PeopleDataSource.swift */,
 				09069A4321B9FF58005E5314 /* PagedDataSource.swift */,
 				09069A4721BA08AC005E5314 /* MoviesDataSource.swift */,
+				09CFED1921BB4C0200D2E707 /* ReleaseDatesDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -291,6 +300,7 @@
 				096D0BAB21B5FE0C007FDBA0 /* GenresController.swift in Sources */,
 				099D3B1221B2398000560D6A /* TmdbClient.swift in Sources */,
 				099D3B0321B20A0D00560D6A /* Endpoint.swift in Sources */,
+				09CFED1621BB495100D2E707 /* ReleaseDatesController.swift in Sources */,
 				09069A3621B8A84E005E5314 /* Cache.swift in Sources */,
 				09069A3821B8AB05005E5314 /* Configuration.swift in Sources */,
 				099D3B0A21B22C0E00560D6A /* Page.swift in Sources */,
@@ -307,7 +317,9 @@
 				099D3B0721B2272D00560D6A /* ApiClient.swift in Sources */,
 				09069A4421B9FF58005E5314 /* PagedDataSource.swift in Sources */,
 				099D3B0C21B22C9000560D6A /* Genre.swift in Sources */,
+				09CFED1A21BB4C0200D2E707 /* ReleaseDatesDataSource.swift in Sources */,
 				096D0BAE21B5FEC6007FDBA0 /* GenreCell.swift in Sources */,
+				09CFED1821BB4B4500D2E707 /* DecadeCell.swift in Sources */,
 				09069A3A21B8AB32005E5314 /* ImagesConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

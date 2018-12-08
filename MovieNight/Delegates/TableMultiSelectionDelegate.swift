@@ -10,9 +10,7 @@ import UIKit
 
 /// Limits multiple selection.
 /// Updates "selected" label and "next" button.
-/// Not confoming to UITableViewDelegate protocol because this only handles the selection,
-/// which is only part of what can be handles by a delegate.
-class TableMultiSelectionDelegate: NSObject {
+class TableMultiSelectionDelegate: NSObject, UITableViewDelegate {
     /// The target number of cells the user should select
     var targetSelectionCount: Int = 5
     /// A label that displays "x out of y selected".

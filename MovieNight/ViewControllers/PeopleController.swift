@@ -26,7 +26,7 @@ class PeopleController: UIViewController {
 
         tableView.dataSource = peopleDataSource
         tableView.prefetchDataSource = peopleDataSource
-        tableView.delegate = self
+        tableView.delegate = selectionDelegate
         
         peopleDataSource.fetchError = fetchError
         peopleDataSource.fetch()
@@ -43,12 +43,12 @@ class PeopleController: UIViewController {
      */
     
     @IBAction func skip(_ sender: UIBarButtonItem) {
-        print("performSegue")
+        performSegue(withIdentifier: "showReleaseDates", sender: nil)
     }
     
     @IBAction func next(_ sender: UIBarButtonItem) {
         saveMoviePrefs()
-        print("performSegue")
+        performSegue(withIdentifier: "showReleaseDates", sender: nil)
     }
     
     /// Save the user selection to the movie prefs in the root view controller.
@@ -67,27 +67,4 @@ class PeopleController: UIViewController {
     private func fetchError(error: Error) {
         showAlert(title: "People Download Failure", message: error.localizedDescription)
     }
-}
-
-extension PeopleController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return selectionDelegate.tableView(tableView, willSelectRowAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectionDelegate.tableView(tableView, didSelectRowAt: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        selectionDelegate.tableView(tableView, didDeselectRowAt: indexPath)
-    }
-    /*
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // Load more results when tableView has scrolled to the bottom.
-        let lastElement = peopleDataSource.people.count - 1
-        if indexPath.row == lastElement {
-            loadNextPage()
-        }
-    }
-    */
 }

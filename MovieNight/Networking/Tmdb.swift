@@ -24,7 +24,7 @@ enum Tmdb {
     /// Get the list of popular people on TMDb. This list updates daily.
     case personPopular(apiKey: String, page: Int)
     /// Discover movies based on certain filters
-    case discoverMovie(apiKey: String, page: Int, withGenres: Set<Genre>, withPeople: Set<Person>)
+    case discoverMovie(apiKey: String, page: Int, withGenres: Set<Genre>, withPeople: Set<Person>, primaryReleaseDateGte: Date?, primaryReleaseDateLte: Date?)
 }
 
 extension Tmdb: Endpoint {
@@ -56,17 +56,34 @@ extension Tmdb: Endpoint {
                 URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey),
                 URLQueryItem(name: Tmdb.Keys.page, value: String(page))
             ]
-        case .discoverMovie(let apiKey, let page, let withGenres, let withPeople):
+        case .discoverMovie(let apiKey, let page, let withGenres, let withPeople, let primaryReleaseDateGte, let primaryReleaseDateLte):
             let genreIdsArray = withGenres.map { "\($0.id)" }
             let genreIds = genreIdsArray.joined(separator: "|")
             let peopleIdsArray = withPeople.map { "\($0.id)" }
             let peopleIds = peopleIdsArray.joined(separator: "|")
-            return [
+            
+            var result = [
                 URLQueryItem(name: Tmdb.Keys.apiKey, value: apiKey),
                 URLQueryItem(name: Tmdb.Keys.page, value: String(page)),
                 URLQueryItem(name: "with_genres", value: genreIds),
                 URLQueryItem(name: "with_people", value: peopleIds)
             ]
+            
+            // Primary release date greater than or equal to
+            if let releaseDate = primaryReleaseDateGte {
+                let str = TmdbClient.dateFormatter.string(from: releaseDate)
+                let queryItem = URLQueryItem(name: "primary_release_date.gte", value: str)
+                result.append(queryItem)
+            }
+            
+            // Primary release date less than or equal to
+            if let releaseDate = primaryReleaseDateLte {
+                let str = TmdbClient.dateFormatter.string(from: releaseDate)
+                let queryItem = URLQueryItem(name: "primary_release_date.lte", value: str)
+                result.append(queryItem)
+            }
+            
+            return result
         }
     }
 }
