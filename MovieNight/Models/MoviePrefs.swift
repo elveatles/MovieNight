@@ -74,6 +74,8 @@ struct MoviePrefs {
         maxYear += 9
         var components = DateComponents()
         components.year = maxYear
+        components.month = 12
+        components.day = 31
         return Calendar.current.date(from: components)
     }
 }
