@@ -46,7 +46,9 @@ struct MoviePrefs {
     }
     
     /// Check if these preferences are ready to be used
-    var isReady = false
+    var isReady: Bool {
+        return !genres.isEmpty || !people.isEmpty || !decades.isEmpty
+    }
     /// The genres the user likes
     var genres = Set<Genre>()
     /// People the user likes

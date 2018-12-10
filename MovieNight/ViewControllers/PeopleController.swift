@@ -13,7 +13,12 @@ class PeopleController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionCountLabel: UILabel!
     @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBOutlet weak var prefsStatusView: PrefsStatusView!
+    @IBOutlet var checkboxes: [UIImageView]!
     
+    var rootViewController: ViewController {
+        return navigationController!.viewControllers.first as! ViewController
+    }
     private lazy var peopleDataSource = {
         return PeopleDataSource(tableView: tableView)
     }()
@@ -28,8 +33,16 @@ class PeopleController: UIViewController {
         tableView.prefetchDataSource = peopleDataSource
         tableView.delegate = selectionDelegate
         
+        prefsStatusView.checkboxes = checkboxes
+        
         peopleDataSource.fetchError = fetchError
         peopleDataSource.fetch()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        prefsStatusView.update(with: rootViewController.currentMoviePrefs)
     }
     
     /*
@@ -43,6 +56,7 @@ class PeopleController: UIViewController {
      */
     
     @IBAction func skip(_ sender: UIBarButtonItem) {
+        saveMoviePrefsSkip()
         performSegue(withIdentifier: "showReleaseDates", sender: nil)
     }
     
@@ -51,10 +65,18 @@ class PeopleController: UIViewController {
         performSegue(withIdentifier: "showReleaseDates", sender: nil)
     }
     
+    /// Save preferences for a skip. Basically saves an empty set.
+    func saveMoviePrefsSkip() {
+        let rootVC = rootViewController
+        var moviePrefs = rootVC.currentMoviePrefs
+        moviePrefs.people = Set()
+        rootVC.updateMoviePrefs(moviePrefs)
+    }
+    
     /// Save the user selection to the movie prefs in the root view controller.
     func saveMoviePrefs() {
         // Get movie preferences from root view controller
-        let rootVC = navigationController!.viewControllers.first as! ViewController
+        let rootVC = rootViewController
         var moviePrefs = rootVC.currentMoviePrefs
         // Get the person objects from the user selection
         let indexPaths = tableView.indexPathsForSelectedRows ?? []

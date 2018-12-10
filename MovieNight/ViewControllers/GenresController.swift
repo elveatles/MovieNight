@@ -13,7 +13,12 @@ class GenresController: UIViewController {
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionCountLabel: UILabel!
+    @IBOutlet weak var prefsStatusView: PrefsStatusView!
+    @IBOutlet var checkboxes: [UIImageView]!
     
+    var rootViewController: ViewController {
+        return navigationController!.viewControllers.first as! ViewController
+    }
     private let genresDataSource = GenresDataSource()
     private lazy var selectionDelegate: TableMultiSelectionDelegate = {
         return TableMultiSelectionDelegate(selectionCountLabel: selectionCountLabel, nextButton: nextButton)
@@ -25,7 +30,15 @@ class GenresController: UIViewController {
         tableView.dataSource = genresDataSource
         tableView.delegate = selectionDelegate
         
+        prefsStatusView.checkboxes = checkboxes
+        
         downloadGenres()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        prefsStatusView.update(with: rootViewController.currentMoviePrefs)
     }
     
     /*
@@ -40,6 +53,7 @@ class GenresController: UIViewController {
     
     /// Skip this preference
     @IBAction func skip(_ sender: UIBarButtonItem) {
+        saveMoviePrefsSkip()
         performSegue(withIdentifier: "showPeople", sender: nil)
     }
     
@@ -64,6 +78,14 @@ class GenresController: UIViewController {
                 s.showAlert(title: "Genres Download Failed", message: error.localizedDescription)
             }
         }
+    }
+    
+    /// Save preferences for a skip. Basically saves an empty set.
+    func saveMoviePrefsSkip() {
+        let rootVC = rootViewController
+        var moviePrefs = rootVC.currentMoviePrefs
+        moviePrefs.genres = Set()
+        rootVC.updateMoviePrefs(moviePrefs)
     }
     
     /// Save the user selection to the movie prefs in the root view controller.

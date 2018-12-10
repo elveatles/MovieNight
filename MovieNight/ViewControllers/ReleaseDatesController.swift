@@ -13,6 +13,8 @@ class ReleaseDatesController: UIViewController {
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var selectionCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var prefsStatusView: PrefsStatusView!
+    @IBOutlet var checkboxes: [UIImageView]!
     
     private let releaseDatesDataSource = ReleaseDatesDataSource()
     private lazy var selectionDelegate: TableMultiSelectionDelegate = {
@@ -31,6 +33,15 @@ class ReleaseDatesController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.dataSource = releaseDatesDataSource
         tableView.delegate = selectionDelegate
+        
+        prefsStatusView.checkboxes = checkboxes
+        prefsStatusView.update(with: rootViewController.currentMoviePrefs)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        prefsStatusView.update(with: rootViewController.currentMoviePrefs)
     }
     
     /*
@@ -44,12 +55,21 @@ class ReleaseDatesController: UIViewController {
     */
     
     @IBAction func skip(_ sender: UIBarButtonItem) {
+        saveMoviePrefsSkip()
         navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func next(_ sender: UIBarButtonItem) {
         saveMoviePrefs()
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    /// Save preferences for a skip. Basically saves an empty set.
+    func saveMoviePrefsSkip() {
+        let rootVC = rootViewController
+        var moviePrefs = rootVC.currentMoviePrefs
+        moviePrefs.decades = Set()
+        rootVC.updateMoviePrefs(moviePrefs)
     }
     
     /// Save the user selection to the movie prefs in the root view controller.

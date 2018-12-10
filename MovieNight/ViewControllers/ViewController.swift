@@ -73,13 +73,12 @@ class ViewController: UIViewController {
     */
     func updateMoviePrefs(_ newMoviePrefs: MoviePrefs) {
         // Update the preferences for the current user
-        var prefs = newMoviePrefs
-        prefs.isReady = true
-        moviePrefs[moviePrefsIndex] = prefs
+        moviePrefs[moviePrefsIndex] = newMoviePrefs
         
         // Show that the user has made their choice
         let userButton = moviePrefsIndex == 0 ? user0Button! : user1Button!
-        userButton.setImage(#imageLiteral(resourceName: "bubble-selected"), for: .normal)
+        let buttonImage = newMoviePrefs.isReady ? #imageLiteral(resourceName: "bubble-selected") : #imageLiteral(resourceName: "bubble-empty")
+        userButton.setImage(buttonImage, for: .normal)
         
         // Check if all users made their choices.
         // If so, enable the viewResults button.
