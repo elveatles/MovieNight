@@ -43,7 +43,7 @@ class TmdbClient: ApiClient {
      - Parameter apiKey: API key to use for endpoint authentication.
      - Parameter configuration: Configuration to use for the session.
     */
-    init(apiKey: String, configuration: URLSessionConfiguration = .default) {
+    init(apiKey: String, configuration: URLSessionConfiguration = .ephemeral) {
         self.apiKey = apiKey
         self.session = URLSession(configuration: configuration)
     }
