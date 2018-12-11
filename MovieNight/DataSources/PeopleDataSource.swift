@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// Data source for people such as actors, directors, writers, etc.
 class PeopleDataSource: NSObject, UITableViewDataSource {
@@ -19,7 +20,6 @@ class PeopleDataSource: NSObject, UITableViewDataSource {
         }
     }
     private let pagedDataSource: PagedDataSource<Person>
-    private let tableImagesDownloader: TableImagesDownloader
     
     /// Get the fetched entities
     var entities: [Person] {
@@ -34,7 +34,6 @@ class PeopleDataSource: NSObject, UITableViewDataSource {
     init(tableView: UITableView) {
         self.tableView = tableView
         self.pagedDataSource = PagedDataSource(tableView: tableView)
-        self.tableImagesDownloader = TableImagesDownloader(tableView: tableView)
         
         super.init()
         
@@ -57,9 +56,7 @@ class PeopleDataSource: NSObject, UITableViewDataSource {
         } else {
             let person = pagedDataSource.entities[indexPath.row]
             cell.configure(with: person)
-            if let imageView = cell.personImageView {
-                tableImagesDownloader.downloadOrAssignImage(imageView: imageView, indexPath: indexPath, url: person.profileURL, defaultImage: defaultImage)
-            }
+            cell.personImageView.kf.setImage(with: person.profileURL, placeholder: defaultImage)
         }
         
         return cell

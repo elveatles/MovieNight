@@ -10,12 +10,14 @@ import UIKit
 
 /// A cell that shows movie data
 class MovieCell: UITableViewCell {
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        detailTextLabel?.textColor = UIColor(white: 0.0, alpha: 0.4)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,20 +33,20 @@ class MovieCell: UITableViewCell {
      */
     func configure(with movie: Movie?) {
         guard let m = movie else {
-            textLabel?.text = ""
-            detailTextLabel?.text = ""
+            titleLabel.text = ""
+            yearLabel.text = ""
             activityIndicator.startAnimating()
             return
         }
         
-        textLabel?.text = m.title
+        titleLabel.text = m.title
         
         // Set the year
         if let releaseDate = m.releaseDate {
             let year = Calendar.current.component(.year, from: releaseDate)
-            detailTextLabel?.text = "\(year)"
+            yearLabel.text = "\(year)"
         } else {
-            detailTextLabel?.text = "????"
+            yearLabel.text = "????"
         }
         
         activityIndicator.stopAnimating()

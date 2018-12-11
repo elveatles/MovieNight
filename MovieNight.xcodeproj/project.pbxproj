@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09069A3421B8A51C005E5314 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A3321B8A51C005E5314 /* ImageDownloader.swift */; };
 		09069A3621B8A84E005E5314 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A3521B8A84E005E5314 /* Cache.swift */; };
 		09069A3821B8AB05005E5314 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A3721B8AB05005E5314 /* Configuration.swift */; };
 		09069A3A21B8AB32005E5314 /* ImagesConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A3921B8AB32005E5314 /* ImagesConfig.swift */; };
-		09069A3E21B8C37C005E5314 /* TableImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A3D21B8C37C005E5314 /* TableImagesDownloader.swift */; };
 		09069A4221B9E51F005E5314 /* PageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A4121B9E51F005E5314 /* PageFetcher.swift */; };
 		09069A4421B9FF58005E5314 /* PagedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A4321B9FF58005E5314 /* PagedDataSource.swift */; };
 		09069A4821BA08AC005E5314 /* MoviesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09069A4721BA08AC005E5314 /* MoviesDataSource.swift */; };
@@ -22,6 +20,7 @@
 		096D0BB021B60248007FDBA0 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D0BAF21B60248007FDBA0 /* Stub.swift */; };
 		096D0BB321B604C5007FDBA0 /* GenresDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D0BB221B604C5007FDBA0 /* GenresDataSource.swift */; };
 		098EC6BD21BF076800F7E722 /* PrefsStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EC6BC21BF076800F7E722 /* PrefsStatusView.swift */; };
+		098EC6C021C03C7700F7E722 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098EC6BF21C03C7700F7E722 /* Kingfisher.framework */; };
 		099D3AF021B1CDE300560D6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3AEF21B1CDE300560D6A /* AppDelegate.swift */; };
 		099D3AF221B1CDE300560D6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099D3AF121B1CDE300560D6A /* ViewController.swift */; };
 		099D3AF521B1CDE300560D6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 099D3AF321B1CDE300560D6A /* Main.storyboard */; };
@@ -48,11 +47,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09069A3321B8A51C005E5314 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		09069A3521B8A84E005E5314 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		09069A3721B8AB05005E5314 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		09069A3921B8AB32005E5314 /* ImagesConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesConfig.swift; sourceTree = "<group>"; };
-		09069A3D21B8C37C005E5314 /* TableImagesDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableImagesDownloader.swift; sourceTree = "<group>"; };
 		09069A4121B9E51F005E5314 /* PageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFetcher.swift; sourceTree = "<group>"; };
 		09069A4321B9FF58005E5314 /* PagedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedDataSource.swift; sourceTree = "<group>"; };
 		09069A4721BA08AC005E5314 /* MoviesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataSource.swift; sourceTree = "<group>"; };
@@ -63,6 +60,7 @@
 		096D0BAF21B60248007FDBA0 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		096D0BB221B604C5007FDBA0 /* GenresDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresDataSource.swift; sourceTree = "<group>"; };
 		098EC6BC21BF076800F7E722 /* PrefsStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsStatusView.swift; sourceTree = "<group>"; };
+		098EC6BF21C03C7700F7E722 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		099D3AEC21B1CDE300560D6A /* MovieNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		099D3AEF21B1CDE300560D6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		099D3AF121B1CDE300560D6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098EC6C021C03C7700F7E722 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,11 +136,20 @@
 			path = DataSources;
 			sourceTree = "<group>";
 		};
+		098EC6BE21C03C7700F7E722 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				098EC6BF21C03C7700F7E722 /* Kingfisher.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		099D3AE321B1CDE300560D6A = {
 			isa = PBXGroup;
 			children = (
 				099D3AEE21B1CDE300560D6A /* MovieNight */,
 				099D3AED21B1CDE300560D6A /* Products */,
+				098EC6BE21C03C7700F7E722 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,9 +188,7 @@
 				099D3B0621B2272D00560D6A /* ApiClient.swift */,
 				099D3B0F21B2393B00560D6A /* Tmdb.swift */,
 				099D3B1121B2398000560D6A /* TmdbClient.swift */,
-				09069A3321B8A51C005E5314 /* ImageDownloader.swift */,
 				09069A3521B8A84E005E5314 /* Cache.swift */,
-				09069A3D21B8C37C005E5314 /* TableImagesDownloader.swift */,
 				09069A4121B9E51F005E5314 /* PageFetcher.swift */,
 			);
 			path = Networking;
@@ -229,6 +235,7 @@
 				099D3AE821B1CDE300560D6A /* Sources */,
 				099D3AE921B1CDE300560D6A /* Frameworks */,
 				099D3AEA21B1CDE300560D6A /* Resources */,
+				098EC6C121C03CC500F7E722 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -285,6 +292,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		098EC6C121C03CC500F7E722 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		099D3AE821B1CDE300560D6A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -299,7 +328,6 @@
 				09EDCF6721B7575900701213 /* TableMultiSelectionDelegate.swift in Sources */,
 				09069A4A21BA0B70005E5314 /* MovieCell.swift in Sources */,
 				096D0BB321B604C5007FDBA0 /* GenresDataSource.swift in Sources */,
-				09069A3E21B8C37C005E5314 /* TableImagesDownloader.swift in Sources */,
 				096D0BAB21B5FE0C007FDBA0 /* GenresController.swift in Sources */,
 				099D3B1221B2398000560D6A /* TmdbClient.swift in Sources */,
 				099D3B0321B20A0D00560D6A /* Endpoint.swift in Sources */,
@@ -316,7 +344,6 @@
 				09EDCF7121B858A400701213 /* MoviesController.swift in Sources */,
 				09EDCF6F21B84E0100701213 /* Movie.swift in Sources */,
 				099D3B0521B2226400560D6A /* ApiKey.swift in Sources */,
-				09069A3421B8A51C005E5314 /* ImageDownloader.swift in Sources */,
 				099D3AF021B1CDE300560D6A /* AppDelegate.swift in Sources */,
 				099D3B0721B2272D00560D6A /* ApiClient.swift in Sources */,
 				09069A4421B9FF58005E5314 /* PagedDataSource.swift in Sources */,
@@ -472,6 +499,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HNRE2G9YKL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieNight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -490,6 +521,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HNRE2G9YKL;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MovieNight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

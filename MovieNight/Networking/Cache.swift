@@ -11,5 +11,4 @@ import UIKit
 /// Cache for downloaded content
 class Cache {
     static var configuration = Configuration()
-    static var images = [URL: UIImage]()
 }

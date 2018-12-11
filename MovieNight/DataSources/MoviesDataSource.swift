@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// Data source for movies
 class MoviesDataSource: NSObject, UITableViewDataSource {
@@ -22,8 +23,6 @@ class MoviesDataSource: NSObject, UITableViewDataSource {
     }
     /// Manages fetching pages for the tableView.
     private let pagedDataSource: PagedDataSource<Movie>
-    /// Manages downloading images for the tableView.
-    private let tableImagesDownloader: TableImagesDownloader
     
     /// Get the fetched entities
     var entities: [Movie] {
@@ -40,7 +39,6 @@ class MoviesDataSource: NSObject, UITableViewDataSource {
         self.tableView = tableView
         self.moviePrefs = moviePrefs
         self.pagedDataSource = PagedDataSource(tableView: tableView)
-        self.tableImagesDownloader = TableImagesDownloader(tableView: tableView)
         
         super.init()
         
@@ -59,13 +57,11 @@ class MoviesDataSource: NSObject, UITableViewDataSource {
         
         if pagedDataSource.isLoadingCell(indexPath: indexPath) {
             cell.configure(with: nil)
-            cell.imageView?.image = defaultImage
+            cell.posterImageView.image = defaultImage
         } else {
             let movie = pagedDataSource.entities[indexPath.row]
             cell.configure(with: movie)
-            if let imageView = cell.imageView {
-                tableImagesDownloader.downloadOrAssignImage(imageView: imageView, indexPath: indexPath, url: movie.posterURL, defaultImage: defaultImage)
-            }
+            cell.posterImageView.kf.setImage(with: movie.posterURL, placeholder: defaultImage)
         }
         
         return cell

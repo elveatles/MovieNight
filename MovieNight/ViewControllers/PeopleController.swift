@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// User chooses which people they want for their preferences
 class PeopleController: UIViewController {
@@ -31,7 +32,7 @@ class PeopleController: UIViewController {
 
         tableView.dataSource = peopleDataSource
         tableView.prefetchDataSource = peopleDataSource
-        tableView.delegate = selectionDelegate
+        tableView.delegate = self
         
         prefsStatusView.checkboxes = checkboxes
         
@@ -88,5 +89,29 @@ class PeopleController: UIViewController {
     
     private func fetchError(error: Error) {
         showAlert(title: "People Download Failure", message: error.localizedDescription)
+    }
+}
+
+extension PeopleController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return selectionDelegate.tableView(tableView, willSelectRowAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectionDelegate.tableView(tableView, didSelectRowAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selectionDelegate.tableView(tableView, didDeselectRowAt: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Because UITableView reuses cells, if a cell is scrolled off screen while
+        // its image is still downloading, the cell will be reused, but the old
+        // image download will be used which is wrong.
+        // By cancelling the image download when the cell scrolls off-screen,
+        // this bug will be prevented.
+        let personCell = cell as! PersonCell
+        personCell.personImageView.kf.cancelDownloadTask()
     }
 }
