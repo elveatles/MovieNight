@@ -15,6 +15,7 @@ class GenresController: UIViewController {
     @IBOutlet weak var selectionCountLabel: UILabel!
     @IBOutlet weak var prefsStatusView: PrefsStatusView!
     @IBOutlet var checkboxes: [UIImageView]!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var rootViewController: ViewController {
         return navigationController!.viewControllers.first as! ViewController
@@ -65,10 +66,13 @@ class GenresController: UIViewController {
     
     /// Download genres and display the results in the table view
     func downloadGenres() {
+        activityIndicator.startAnimating()
         TmdbClient.main.genreMovieList { [weak self] (apiResult) in
             guard let s = self else {
                 return
             }
+            
+            s.activityIndicator.stopAnimating()
             
             switch apiResult {
             case .success(let result):

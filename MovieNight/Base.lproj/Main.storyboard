@@ -272,6 +272,9 @@
                                     <constraint firstAttribute="bottom" secondItem="jpU-ze-HNe" secondAttribute="bottom" constant="8" id="zDW-ud-eus"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iqY-zx-fDk">
+                                <rect key="frame" x="177.5" y="298" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -282,8 +285,10 @@
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="top" secondItem="TwM-yq-d4y" secondAttribute="bottom" id="HKZ-Zd-Ell"/>
                             <constraint firstItem="1n7-CX-OZ9" firstAttribute="top" secondItem="wxD-XU-fcc" secondAttribute="top" id="HUs-fc-hxr"/>
                             <constraint firstItem="hpp-7P-FrP" firstAttribute="trailing" secondItem="wxD-XU-fcc" secondAttribute="trailing" id="S7Z-1v-RgB"/>
+                            <constraint firstItem="iqY-zx-fDk" firstAttribute="centerX" secondItem="TwM-yq-d4y" secondAttribute="centerX" id="Znv-vd-0Jd"/>
                             <constraint firstItem="TwM-yq-d4y" firstAttribute="leading" secondItem="wxD-XU-fcc" secondAttribute="leading" id="cEQ-HG-FJc"/>
                             <constraint firstItem="1n7-CX-OZ9" firstAttribute="trailing" secondItem="wxD-XU-fcc" secondAttribute="trailing" id="d35-dx-s5j"/>
+                            <constraint firstItem="iqY-zx-fDk" firstAttribute="centerY" secondItem="TwM-yq-d4y" secondAttribute="centerY" id="f32-H2-N1c"/>
                             <constraint firstItem="1n7-CX-OZ9" firstAttribute="leading" secondItem="wxD-XU-fcc" secondAttribute="leading" id="pIm-NN-IGy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wxD-XU-fcc"/>
@@ -306,6 +311,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="iqY-zx-fDk" id="5Wp-Uf-Oau"/>
                         <outlet property="nextButton" destination="Ijk-2h-NRD" id="Sjj-Ny-jae"/>
                         <outlet property="prefsStatusView" destination="1n7-CX-OZ9" id="bvL-a4-B8G"/>
                         <outlet property="selectionCountLabel" destination="U82-ZH-EwT" id="yxe-z0-pa2"/>
@@ -340,27 +346,27 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="aKr-kH-73P">
-                                                    <rect key="frame" x="15" y="22.5" width="25" height="25"/>
+                                                    <rect key="frame" x="15" y="20" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="f0Z-b1-cKq"/>
                                                         <constraint firstAttribute="width" constant="25" id="vkB-kJ-zVF"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="NL7-8q-Hor">
-                                                    <rect key="frame" x="48" y="2.5" width="65" height="65"/>
+                                                    <rect key="frame" x="48" y="-0.5" width="65" height="65.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="Bf0-Gg-q7y"/>
                                                         <constraint firstAttribute="height" constant="65" id="dTd-BJ-DBP"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4p-Ob-Vax">
-                                                    <rect key="frame" x="121" y="24.5" width="42" height="21"/>
+                                                    <rect key="frame" x="121" y="22" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rR4-yY-M50">
-                                                    <rect key="frame" x="177.5" y="25" width="20" height="20"/>
+                                                    <rect key="frame" x="177.5" y="22.5" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
